@@ -1,11 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-const { PDFParse } = require('pdf-parse') as {
-  PDFParse: new (opts: { data: Uint8Array; verbosity?: number }) => {
-    getText: () => Promise<{ pages: { text: string }[] }>
-  }
-}
+const pdfParse = require('pdf-parse') as (buf: Buffer) => Promise<{ text: string }>
 
 export async function POST(req: NextRequest) {
   try {
@@ -17,11 +13,9 @@ export async function POST(req: NextRequest) {
     }
 
     const buffer = Buffer.from(await file.arrayBuffer())
-    const parser = new PDFParse({ data: new Uint8Array(buffer) })
-    const result = await parser.getText()
-    const text = result.pages.map((p) => p.text).join('\n').slice(0, 4000)
+    const { text } = await pdfParse(buffer)
 
-    return NextResponse.json({ text })
+    return NextResponse.json({ text: text.slice(0, 4000) })
   } catch (err) {
     console.error('Resume parse error:', err)
     return NextResponse.json({ error: 'Failed to parse resume' }, { status: 500 })

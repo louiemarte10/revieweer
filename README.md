@@ -260,3 +260,9 @@ See [SETUP.md](./SETUP.md) for full environment setup and Vercel deployment inst
 | `GROQ_API_KEY` | Yes | Groq Whisper key — [console.groq.com](https://console.groq.com) (free) |
 | `ELEVENLABS_API_KEY` | Yes | ElevenLabs TTS key — [elevenlabs.io](https://elevenlabs.io) |
 | `ELEVENLABS_VOICE_ID` | No | Voice ID (default: Brian `nPczCjzI2devNBz1zQrb`) |
+
+---
+
+## Author
+
+**Louie Marte** — [@louiemarte10](https://github.com/louiemarte10)

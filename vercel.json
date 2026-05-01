@@ -3,6 +3,7 @@
     "app/api/respond/route.ts": { "maxDuration": 30 },
     "app/api/speak/route.ts": { "maxDuration": 30 },
     "app/api/transcribe/route.ts": { "maxDuration": 30 },
-    "app/api/parse-resume/route.ts": { "maxDuration": 15 }
+    "app/api/parse-resume/route.ts": { "maxDuration": 15 },
+    "app/api/answer/route.ts": { "maxDuration": 30 }
   }
 }

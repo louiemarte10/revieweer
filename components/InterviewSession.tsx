@@ -55,6 +55,8 @@ export default function InterviewSession({ topic, resumeText, onEnd }: Props) {
       const data = await res.json()
       const aiText: string = data.response
 
+      if (!aiText) throw new Error(data.error || 'Empty response from AI')
+
       setCurrentQuestion(aiText)
       const updated = [...currentMessages, { role: 'assistant' as const, content: aiText }]
       setMessages(updated)
@@ -65,8 +67,9 @@ export default function InterviewSession({ topic, resumeText, onEnd }: Props) {
 
       setQuestionReady(true)
       setStatus('Question ready — click Listen to hear it')
-    } catch {
-      setStatus('Error — please try again')
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : 'Unknown error'
+      setStatus(`Error: ${msg}`)
     } finally {
       setAiThinking(false)
     }
